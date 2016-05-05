@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SteamAPI_Interface", "SteamAPI_Interface\SteamAPI_Interface.vcxproj", "{05304CE0-EDA3-4847-8B56-F8E6B676A569}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05304CE0-EDA3-4847-8B56-F8E6B676A569}.Debug|Win32.ActiveCfg = Debug|Win32
+		{05304CE0-EDA3-4847-8B56-F8E6B676A569}.Debug|Win32.Build.0 = Debug|Win32
+		{05304CE0-EDA3-4847-8B56-F8E6B676A569}.Release|Win32.ActiveCfg = Release|Win32
+		{05304CE0-EDA3-4847-8B56-F8E6B676A569}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
