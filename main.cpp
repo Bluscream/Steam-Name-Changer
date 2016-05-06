@@ -60,13 +60,13 @@ int main(int argc, char* argv[])
 
 	//Format application path
 	if (!SetAppPath(g_szAppPath)) {
-		ConsolePrint("[SetAppPath] failed: %d", GetLastError());
+		ConsolePrint("[Formatting App Path] Failed: %d", GetLastError());
 		return EXIT_FAILURE;
 	}
 
 	//Register console control handler
 	if (!SetConsoleCtrlHandler(&ConsoleControlHandler, TRUE)) {
-		ConsolePrint("[SetConsoleCtrlHandler] failed: %d", GetLastError());
+		ConsolePrint("[Console Control Handler] Failed to register: %d", GetLastError());
 		return EXIT_FAILURE;
 	}
 
@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
 
 	InitResult irResult = g_oSteamAPI.Initialize(g_szAppPath);
 	
-	ConsolePrint("[g_oSteamAPI.Initialize] result: %d (%s) -> %d\n", irResult, g_oSteamAPI.InitResultToString(irResult), GetLastError());
+	ConsolePrint("[SteamAPI] Initialized: %d (%s) -> %d\n", irResult, g_oSteamAPI.InitResultToString(irResult), GetLastError());
 
 	if (irResult != IR_SUCCESS)
 		return EXIT_FAILURE;
@@ -83,14 +83,14 @@ int main(int argc, char* argv[])
 
 	ISteamFriends* pSteamFriends = g_oSteamAPI.SteamFriendsInterface();
 	if (!pSteamFriends)
-		ConsolePrint("[g_oSteamAPI.SteamFriendsInterface] failed");
+		ConsolePrint("[SteamAPI] SteamFriendsInterface failed to initialize!");
 
 	g_oNameChanger.SetInterface(pSteamFriends);
 	g_oNameChanger.SetStatus(TRUE);
 
 	//Main loop
 
-	ConsolePrint("Entering main loop, press ESC to exit.");
+	ConsolePrint("Waiting for games, press [ESC] to exit.");
 	
 	g_oNameChanger.ReadNames();
 

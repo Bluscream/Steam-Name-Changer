@@ -52,3 +52,4 @@ Steam Name Changer.VC.db
 *.tlog
 STEAMAPI_INTERFACE/Release/*
 Release/*
+.vs/Steam Name Changer/v14/.suo

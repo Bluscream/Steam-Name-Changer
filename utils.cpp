@@ -14,7 +14,7 @@ using namespace std;
 */
 
 //======================================================================
-BOOL SetAppPath(LPSTR lpszOut)
+bool SetAppPath(char * lpszOut)
 {
 	//Write application path to string
 
@@ -38,7 +38,7 @@ BOOL SetAppPath(LPSTR lpszOut)
 //======================================================================
 
 //======================================================================
-VOID ConsolePrint(LPCSTR lpszFmt, ...)
+void ConsolePrint(char* lpszFmt, ...)
 {
 	//Print text to console
 
@@ -56,14 +56,14 @@ VOID ConsolePrint(LPCSTR lpszFmt, ...)
 //======================================================================
 
 //======================================================================
-VOID CNameChanger::SetInterface(ISteamFriends* pSteamFriends)
+void CNameChanger::SetInterface(ISteamFriends* pSteamFriends)
 {
 	//Set pointer to Steam Friends interface
 
 	this->pSteamFriends = pSteamFriends;
 }
 //======================================================================
-VOID CNameChanger::ReadConfig()
+void CNameChanger::ReadConfig()
 {
 
 }
@@ -106,7 +106,7 @@ void convertToLower(char *str)
 
 //======================================================================
 
-VOID CNameChanger::ReadNames()
+void CNameChanger::ReadNames()
 {
 	FILE *fp = fopen("names.cfg", "rb");
 	int len = get_file_size(fp);
@@ -135,7 +135,7 @@ VOID CNameChanger::ReadNames()
 //======================================================================
 
 //======================================================================
-BOOL CNameChanger::SetStatus(BOOL bEnable)
+bool CNameChanger::SetStatus(bool bEnable)
 {
 	//Set name change status
 
@@ -158,7 +158,7 @@ BOOL CNameChanger::SetStatus(BOOL bEnable)
 
 //======================================================================
 
-LPSTR CNameChanger::GetName(LPSTR game)
+char *CNameChanger::GetName(char * game)
 {
 	if (!strcmp(game, "<unknown>"))
 		return NULL;
@@ -176,7 +176,7 @@ LPSTR CNameChanger::GetName(LPSTR game)
 
 //======================================================================
 
-BOOL CNameChanger::IsProcessListed(LPSTR game)
+bool CNameChanger::IsProcessListed(char * game)
 {
 	for (auto process : namecombinations)
 	{
@@ -190,7 +190,7 @@ BOOL CNameChanger::IsProcessListed(LPSTR game)
 //======================================================================
 
 //======================================================================
-LPSTR CNameChanger::GetCurrentName()
+char *CNameChanger::GetCurrentName()
 {
 	DWORD aProcesses[1024], cbNeeded, cProcesses;
 	unsigned int i;
@@ -231,12 +231,16 @@ LPSTR CNameChanger::GetCurrentName()
 				}
 			}
 
-			if (IsProcessListed(szProcessName))
+			if (IsProcessListed(szProcessName)) {
+				if(strcmp(szProcessName, lastGame)){
+					printf("Found running game: %s\n", szProcessName);
+					lastGame = strdup(szProcessName);
+				}
+
 				return GetName(szProcessName);
+			}
 		}
-		catch (int e)
-		{
-		}
+		catch (int e){}
 		
 	}
 
@@ -245,11 +249,9 @@ LPSTR CNameChanger::GetCurrentName()
 //======================================================================
 
 //======================================================================
-VOID CNameChanger::Think(VOID)
+void CNameChanger::Think()
 {
 	//Process name change
-
-	#define NC_TIMETOWAIT 1000
 
 	if (!bStatus)
 		return;
@@ -262,17 +264,25 @@ VOID CNameChanger::Think(VOID)
 		dwLastTimer = GetTickCount();
 
 		//Change name
-		LPSTR pString = GetCurrentName();
+		char *pString = GetCurrentName();
+		char *pCurName = strdup(pSteamFriends->GetPersonaName());
+
 		if (pString) {
+			static bool isFirstTime = true;
+
 			if (oldName != NULL && !strcmp(oldName, pString))
 				return;
 
 			// Set the old name
 			oldName = strdup(pString);
 
-			// Set the actual name
-			printf("Setting personal name to %s.\n", pString);
-			pSteamFriends->SetPersonaName(pString);
+			if (!isFirstTime)
+			{
+				ConsolePrint("Changing Steam name from %s to %s.\n", oldName, pString);
+				pSteamFriends->SetPersonaName(pString);
+			}
+
+			isFirstTime = false;
 		}
 	}
 }

@@ -14,14 +14,14 @@
 */
 
 //======================================================================
-BOOL SetAppPath(LPSTR lpszOut);
-VOID ConsolePrint(LPCSTR lpszFmt, ...);
+bool SetAppPath(char * lpszOut);
+void ConsolePrint(char * lpszFmt, ...);
 //======================================================================
 
 //======================================================================
 class CNameChanger { //Changes the Steam Friends name each defined msecs permanently
 private:
-	BOOL bStatus;
+	bool bStatus;
 
 	DWORD dwCurTimer;
 	DWORD dwLastTimer;
@@ -30,11 +30,12 @@ private:
 
 	ISteamFriends *pSteamFriends;
 
-	LPSTR GetCurrentName();
-	LPSTR GetName(LPSTR game);
-	BOOL IsProcessListed(LPSTR game);
+	char * GetCurrentName();
+	char * GetName(char * game);
+	bool IsProcessListed(char * game);
 
-	LPSTR oldName = NULL;
+	char * oldName = NULL;
+	char * lastGame = "";
 
 	std::vector<std::pair<std::string, std::string>> namecombinations;
 
@@ -42,10 +43,10 @@ public:
 	CNameChanger() { bStatus = FALSE; pSteamFriends = NULL; }
 	~CNameChanger() { }
 
-	VOID SetInterface(ISteamFriends* pSteamFriends);
-	VOID ReadConfig();
-	VOID ReadNames();
-	BOOL SetStatus(BOOL bEnable);
+	void SetInterface(ISteamFriends* pSteamFriends);
+	void ReadConfig();
+	void ReadNames();
+	bool SetStatus(bool bEnable);
 
 
 	VOID Think(VOID);

@@ -20,7 +20,9 @@
 #define PROGRAM_CONTACT "Czybik_Stylez@gmx.de"
 #define PROGRAM_INFO PROGRAM_NAME " version " PROGRAM_VERSON " developed by " PROGRAM_AUTHOR " (" PROGRAM_CONTACT ")"
 //======================================================================
-
+#define ENABLED 1
+#define METHOD "GAME"
+#define NC_TIMETOWAIT 1000
 //======================================================================
 extern char g_szAppPath[MAX_PATH];
 extern CAccessSteamAPI g_oSteamAPI;
