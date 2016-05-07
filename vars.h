@@ -21,7 +21,8 @@
 #define PROGRAM_INFO PROGRAM_NAME " version " PROGRAM_VERSON " developed by " PROGRAM_AUTHOR " (" PROGRAM_CONTACT ")"
 //======================================================================
 #define ENABLED 1
-#define METHOD "GAME"
+#define RANDOM 0
+#define BYGAME 1
 #define NC_TIMETOWAIT 1000
 //======================================================================
 extern char g_szAppPath[MAX_PATH];
