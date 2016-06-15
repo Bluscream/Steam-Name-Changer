@@ -7,4 +7,4 @@
 
 #Known Issues
 
-If you start the tool it will always show you as 'in game' of the game the content of the `steam_appid.txt` file refers to. (Default: Counter-Strike 1.6 [10])
+If you start the tool it will always show you as 'in game' of the game the content of the `steam_appid.txt` file refers to. (Default: Counter-Strike 1.6 [10]) It will show the right game after starting to play one.
