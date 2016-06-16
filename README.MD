@@ -2,7 +2,7 @@
 
 1. Get `Steam.Name.Changer.zip` from [here](https://github.com/Bluscream/Steam-Name-Changer/releases/latest) and extract it to a folder that does not get deleted.
 2. Open names.cfg with a text editor and edit it to fit your needs.
-3. Start Steam.
+3. [Start Steam](steam://).
 4. Start the `Steam Name Changer.exe`
 
 #Known Issues
